@@ -34,14 +34,19 @@ $idq2=mysqli_fetch_assoc($result);
 
     <body id="editor" ng-app="ImageEditor" ng-strict-di>
 
-        <div id="splash" ng-cloak>
-            <div id="splash-spinner"> </div>
-        </div>
-
         <div ng-controller="MainController" ng-cloak style="height: 100%">
             <section id="right-panels">
                 <section id="objects" class="md-whiteframe-z1" ng-controller="ObjectsPanelController">
-                    <h3 ed-toggle-panel-visibility="objects"><span>Layers</span><i class="mdi mdi-expand-less"></i></h3>
+                <h3>
+                <a style="color: yellow; text-align: center;" href="logout.php">Log Out</a>
+    <span>
+        <h1 style="color:white;">
+            <?php
+            echo $a;
+            ?>
+        </h1>
+    </span>
+</h3>
                     <div class="scrollbar-wrapper" ed-pretty-scrollbar ed-scroll-axis="y">
                         <ul class="objects-panel list-unstyled" ui-sortable="sortableOptions" ng-model="objects">
                             <li class="object panel-item" ng-repeat="object in objects" ng-click="setAsActive(object)" ng-if="!object.ignore">
@@ -50,15 +55,13 @@ $idq2=mysqli_fetch_assoc($result);
                                 <i class="mdi mdi-lock-outline lock-object" ng-class="{ 'not-locked': !object.locked }" ng-click="toggleLock(object); $event.stopPropagation();"></i>
                                 {{ spacify(object.name) || spacify(object.type) }}
                             </li>
-                            <li ng-if="!canvas.fabric._objects.length" class="text-center"><h4>No layers yet.</h4></li>
+                            <li ng-if="!canvas.fabric._objects.length" class="text-center"><h4>Happy Editing</h4></li>
                         </ul>
                     </div>
+                    <div class="text-center">
+</div>
                 </section>
-                <?php
-        echo $a;
-        echo ' ';
-        echo $b;
-        ?>
+            
                 <section id="history" class="md-whiteframe-z1 panel-hidden">
                     <h3 ed-toggle-panel-visibility="history"><span>History</span><i class="mdi mdi-expand-less"></i></h3>
                     <ul class="history-panel list-unstyled" ed-pretty-scrollbar ed-scroll-axis="y">
@@ -687,6 +690,7 @@ $idq2=mysqli_fetch_assoc($result);
                         <div class="buttons" ng-show="!canOpenImage">
                             <md-button ng-click="openImageMode = 'create'" class="md-primary">Create New</md-button>
                             <md-button ng-click="openSampleImage()">Sample</md-button>
+                            
                         </div>
 
                         <div ng-show="canOpenImage">
